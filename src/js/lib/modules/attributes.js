@@ -1,6 +1,7 @@
 import $ from '../core';
 
-$.prototype.get = function(selector, obj = {}) {
+$.prototype.get = function(selector) {
+  const obj = {};
   if (!selector) {
     return this;
   }
@@ -8,7 +9,7 @@ $.prototype.get = function(selector, obj = {}) {
   for (let i = 0; i < this.length; i++) {
     if (this[i].getAttribute(selector) !== null) {
       obj[i] = this[i].getAttribute(selector);
-    }
+    };
   };
   return obj;
 };

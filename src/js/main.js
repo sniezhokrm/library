@@ -1,9 +1,13 @@
-import './lib/lib';
-
 import $ from './lib/lib';
 
-$('button').on('click', function() {
-    $(this).hide().show().toggleClass('active');
+$('#first').on('click', () => {
+    $('div').eq(1).fadeOut(800);
 });
-console.log($("div").set('id'));
-$(".active").remove("class");
+
+$('[data-count="second"]').on('click', () => {
+    $('div').eq(2).fadeOut(800);
+});
+
+$('button').eq(2).on('click', () => {
+    $('.w-500').fadeIn(800);
+});
