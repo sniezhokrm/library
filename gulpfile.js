@@ -17,6 +17,12 @@ gulp.task("copy-html", () => {
                 .pipe(browsersync.stream());
 });
 
+gulp.task("copy-assets", () => {
+    return gulp.src("./src/assets/**/*.*")
+                .pipe(gulp.dest("./dist/assets/"))
+                .pipe(browsersync.stream());
+});
+
 gulp.task("build-sass", () => {
     return gulp.src("./src/sass/style.scss")
                 .pipe(sass().on('error', sass.logError))
@@ -64,11 +70,12 @@ gulp.task("watch", () => {
     });
 
     gulp.watch("./src/index.html", gulp.parallel("copy-html"));
+    gulp.watch("./src/assets/**/*.*", gulp.parallel("copy-assets"));
     gulp.watch("./src/js/**/*.js", gulp.parallel("build-js"));
     gulp.watch("./src/sass/**/*.scss", gulp.parallel("build-sass"));
 });
 
-gulp.task("build", gulp.parallel("copy-html", "build-js", "build-sass"));
+gulp.task("build", gulp.parallel("copy-html", "copy-assets", "build-js", "build-sass"));
 
 gulp.task("prod", () => {
     gulp.src("./src/sass/style.scss")
