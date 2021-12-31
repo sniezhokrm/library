@@ -136,10 +136,10 @@ Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])('.accordion-head').accordi
 
 /***/ }),
 
-/***/ "./src/js/lib/components/carousel.js":
-/*!*******************************************!*\
-  !*** ./src/js/lib/components/carousel.js ***!
-  \*******************************************/
+/***/ "./src/js/lib/components/carusel.js":
+/*!******************************************!*\
+  !*** ./src/js/lib/components/carusel.js ***!
+  \******************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -150,6 +150,8 @@ __webpack_require__.r(__webpack_exports__);
 
 _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.carousel = function (created) {
   if (created) {
+    console.log(1);
+
     for (let i = 0; i < this.length; i++) {
       const width = window.getComputedStyle(this[i].querySelector('.carousel-inner')).width;
       const slides = this[i].querySelectorAll('.carousel-item');
@@ -202,7 +204,6 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.carousel = function (cre
         dots[slideIndex].classList.add('active');
       });
       const sliderId = this[i].getAttribute('id');
-      const pathLi = `#${sliderId} .carousel-indicators li`;
       Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(`#${sliderId} .carousel-indicators li`).click(e => {
         const slideTo = e.target.getAttribute('data-slide-to');
         slideIndex = slideTo;
@@ -213,10 +214,11 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.carousel = function (cre
       });
     }
   }
-}; //$('[data-toggle="carousel"]').carousel();
+};
 
+Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-toggle="carusel"]').carousel(true);
 
-_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.createCarousel = function (_ref) {
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.createCarusel = function (_ref) {
   let {
     slides = {},
     dots = false,
@@ -224,12 +226,11 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.createCarousel = functio
   } = _ref;
 
   for (let i = 0; i < this.length; i++) {
-    let carousel = document.createElement('div');
-    const date = Date.now();
-    let id = "carusel" + date + 1;
-    carousel.classList.add('carousel');
-    carousel.setAttribute('id', id);
-    carousel.setAttribute('data-toggle', 'carousel');
+    let carusel = document.createElement('div');
+    let id = 'carusel' + i;
+    carusel.classList.add('carusel');
+    carusel.setAttribute('id', id);
+    carusel.setAttribute('data-toggle', 'carusel');
     const liItems = [];
     const slidesBlock = [];
 
@@ -250,8 +251,8 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.createCarousel = functio
       slidesBlock.push(imgBlock);
     }
 
-    carousel.innerHTML = //<div class="carousel" id=${carouselId}>
-    `   <ol class="carousel-indicators">
+    carusel.innerHTML = //<div class="carousel" id=${caruselId}>
+    `<ol class="carousel-indicators">
 
           </ol>
           <div class="carousel-inner">
@@ -264,40 +265,32 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.createCarousel = functio
           </a>
           <a href="#" class="carousel-next" data-slide="next">
               <span class="carousel-next-icon">&gt;</span>
-          </a>`;
-    carousel.querySelector(".carousel-indicators").append(...liItems);
-    carousel.querySelector(".carousel-slides").append(...slidesBlock);
+          </a>`; //  </div>
 
-    if (!this[i].querySelector('.carousel')) {
-      for (var k = 0; k < this.length; k++) {
-        this[k].appendChild(carousel);
-      }
-
-      ;
-    }
-
-    ;
-    Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(`#${id}`).carousel(true);
+    carusel.querySelector(".carousel-indicators").append(...liItems);
+    carusel.querySelector(".carousel-slides").append(...slidesBlock);
+    document.querySelector('[data-on="carusel"]').appendChild(carusel);
+    Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-toggle="carusel"]').carousel(true);
   }
 
   ;
-}; // my option of carousel
+}; // my option of carusel
 // import $ from '../core';
 //
-// $.prototype.carousel = function() {
+// $.prototype.carusel = function() {
 //   for (var i = 0; i < this.length; i++) {
-//     let arrowLeft = this[i].querySelector(".carousel-left"),
-//       arrowRight = this[i].querySelector(".carousel-right"),
-//       dotsBlock = this[i].querySelector(".carousel-dots"),
-//       dots = dotsBlock.querySelectorAll(".carousel-dot"),
-//       slidesBlock = this[i].querySelector(".carousel-inner"),
+//     let arrowLeft = this[i].querySelector(".carusel-left"),
+//       arrowRight = this[i].querySelector(".carusel-right"),
+//       dotsBlock = this[i].querySelector(".carusel-dots"),
+//       dots = dotsBlock.querySelectorAll(".carusel-dot"),
+//       slidesBlock = this[i].querySelector(".carusel-inner"),
 //       slides = slidesBlock.querySelectorAll("img");
 //
 //       this.slideIndex = 0;
 //
 //
 //
-//     const triggercarousel = () => {
+//     const triggerCarusel = () => {
 //       for (var i = 0; i < slides.length; i++) {
 //         $(slides[this.slideIndex]).siblings().fadeOut(1);
 //         $(slides[this.slideIndex]).fadeIn(500);
@@ -308,44 +301,44 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.createCarousel = functio
 //       }
 //     };
 //
-//     const triggercarouselLeft = () => {
+//     const triggerCaruselLeft = () => {
 //       this.slideIndex--;
 //       if (this.slideIndex < 0) {
 //         this.slideIndex = slides.length - 1;
 //       }
 //
-//       triggercarousel();
+//       triggerCarusel();
 //     }
 //
-//     const triggercarouselRight = () => {
+//     const triggerCaruselRight = () => {
 //       this.slideIndex++;
 //       if (this.slideIndex > slides.length - 1) {
 //         this.slideIndex = 0;
 //       }
-//       triggercarousel();
+//       triggerCarusel();
 //     }
 //
-//     const triggercarouselDots = (e) => {
+//     const triggerCaruselDots = (e) => {
 //       const target = e.target;
 //       dots.forEach((item, i) => {
 //         if (target === item) {
 //           this.slideIndex = i;
 //         }
 //       });
-//       triggercarousel();
+//       triggerCarusel();
 //     }
 //
-//     $(arrowLeft).click(triggercarouselLeft);
-//     $(arrowRight).click(triggercarouselRight);
+//     $(arrowLeft).click(triggerCaruselLeft);
+//     $(arrowRight).click(triggerCaruselRight);
 //     dots.forEach((item) => {
-//       $(item).click(triggercarouselDots);
+//       $(item).click(triggerCaruselDots);
 //     });
 //   }
 // };
 //
 //
-// $("#fir").carousel();
-// $("#sec").carousel();
+// $("#fir").carusel();
+// $("#sec").carusel();
 
 /***/ }),
 
@@ -587,7 +580,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_modal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/modal */ "./src/js/lib/components/modal.js");
 /* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/tab */ "./src/js/lib/components/tab.js");
 /* harmony import */ var _components_accardion__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/accardion */ "./src/js/lib/components/accardion.js");
-/* harmony import */ var _components_carousel__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/carousel */ "./src/js/lib/components/carousel.js");
+/* harmony import */ var _components_carusel__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/carusel */ "./src/js/lib/components/carusel.js");
 
 
 
@@ -1016,15 +1009,7 @@ Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('#trigger').click(() =>
     }]]
   }
 }));
-Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-on="carousel"]').createCarousel({
-  slides: {
-    0: "https://ipiccy.com/res/template/img/hp_v2/pics/ba-01s3.jpg",
-    1: "https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?cs=srgb&dl=calm-body-of-water-1363876.jpg&fm=jpg"
-  },
-  dots: true,
-  length: 2
-});
-Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-on="carousel3"]').createCarousel({
+Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('.container').createCarusel({
   slides: {
     0: "https://ipiccy.com/res/template/img/hp_v2/pics/ba-01s3.jpg",
     1: "https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?cs=srgb&dl=calm-body-of-water-1363876.jpg&fm=jpg",
@@ -1032,17 +1017,6 @@ Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-on="carousel3"]'
   },
   dots: true,
   length: 3
-});
-Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-on="carousel2"]').createCarousel({
-  slides: {
-    0: "https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?cs=srgb&dl=calm-body-of-water-1363876.jpg&fm=jpg",
-    1: "https://pixlr.com/images/best-photo-editor-cover.jpg",
-    2: "https://ipiccy.com/res/template/img/hp_v2/pics/ba-01s3.jpg",
-    3: "https://pixlr.com/images/best-photo-editor-cover.jpg",
-    4: "https://ipiccy.com/res/template/img/hp_v2/pics/ba-01s3.jpg"
-  },
-  dots: true,
-  length: 5
 });
 
 /***/ })

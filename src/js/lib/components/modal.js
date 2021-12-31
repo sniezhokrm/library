@@ -64,7 +64,6 @@ $('[data-toggle="modal"]').modal();
 $.prototype.createModal = function({text, btns} = {}) {
 
   const scroll = calcScroll();
-  console.log('1');
 
     for (let i = 0; i< this.length; i++) {
         let modal = document.createElement('div');

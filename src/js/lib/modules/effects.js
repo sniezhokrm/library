@@ -32,7 +32,6 @@ $.prototype.fadeIn = function(dur, display, fin) {
         const _fadeIn = (complection) => {
             this[i].style.opacity = complection;
         };
-        console.log(_fadeIn);
 
         const ani = this.animateOverTime(dur, _fadeIn, fin);
         requestAnimationFrame(ani);

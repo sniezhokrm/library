@@ -1,0 +1,151 @@
+.carousel {
+    display: block;
+    margin: 0 auto;
+    width: 900px;
+    position: relative;
+    &-indicators {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 15;
+        display: flex;
+        justify-content: center;
+        margin-right: 15%;
+        margin-left: 15%;
+        list-style: none;
+        li {
+            box-sizing: content-box;
+            flex: 0 1 auto;
+            width: 30px;
+            height: 6px;
+            margin-right: 3px;
+            margin-left: 3px;
+            cursor: pointer;
+            background-color: #fff;
+            background-clip: padding-box;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            opacity: .5;
+            transition: opacity .6s ease;
+        }
+        .active {
+            opacity: 1;
+        }
+    }
+    &-inner {
+        width: 100%;
+        height: 500px;
+        position: relative;
+        overflow: hidden;
+    }
+    &-slides {
+        height: 100%;
+        display: flex;
+    }
+    &-item {
+        height: 100%;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    &-prev, &-next {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 15%;
+        color: #fff;
+        opacity: .5;
+        text-align: center;
+        font-size: 40px;
+        transition: opacity .15s ease;
+        text-decoration: none;
+        &:hover {
+            opacity: .9;
+            background-color: rgba(0,0,0, .2);
+        }
+    }
+    &-prev {
+        left: 0;
+    }
+    &-next {
+        right: 0;
+    }
+}
+
+// my option of carousel
+//
+// .carousel {
+//   position: relative;
+//   margin: 40px auto;
+//   height: 260px;
+//
+//   &-inner {
+//     height: 100%;
+//     width: 100%;
+//   }
+//
+//   &-img {
+//     display: none;
+//     width: 100%;
+//     height: 100%;
+//     overflow: hidden;
+//   }
+//
+//   .active {
+//     display: block;
+//     background-color: white;;
+//   }
+//
+//   &-arrows {
+//     display: flex;
+//     justify-content: space-between;
+//     position: absolute;
+//     z-index: 100;
+//     top: 0;
+//     height: 100%;
+//     width: 100%;
+//     vertical-align: middle;
+//
+//     a {
+//       padding-top: 31%;
+//       height: 100%;
+//       width: 10%;
+//       font-size: 30px;
+//       color: white;
+//       cursor: pointer;
+//       text-align: center;
+//       &:hover {
+//         background-color: rgba(0,0,0, 0.5);
+//       }
+//     }
+//   }
+//
+//   &-right {
+//     margin: auto 0;
+//   }
+//   &-dots {
+//     display: -webkit-flex;
+//     display: -ms-flex;
+//     display: flex;
+//     justify-content: center;
+//     top: 95%;
+//     left: 50%;
+//     transform: translateX(-50%);
+//     position: absolute;
+//     z-index: 150;
+//     cursor: pointer;
+//   }
+//   &-dot {
+//     background-color: rgba(255, 255, 255, 0.5);
+//     margin-right: 10px;
+//     width: 30px;
+//     height: 10px;
+//   }
+// }
