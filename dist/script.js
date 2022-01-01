@@ -148,7 +148,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
 
 
-_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.carousel = function (created) {
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.carousel = function (created, autoPlay) {
   if (created) {
     for (let i = 0; i < this.length; i++) {
       const width = window.getComputedStyle(this[i].querySelector('.carousel-inner')).width;
@@ -161,6 +161,28 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.carousel = function (cre
       });
       let offset = 0;
       let slideIndex = 0;
+      let slideInt = 0;
+
+      function setInt(content, delay) {
+        slideInt = setInterval(content, delay);
+      }
+
+      function clearInt(content) {
+        clearInterval(content);
+      }
+
+      if (autoPlay) {
+        const clickNextSlide = () => Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i].querySelector('[data-slide="next"]')).click();
+
+        setInt(clickNextSlide, autoPlay);
+        this[i].addEventListener('mouseover', () => {
+          clearInt(slideInt);
+        });
+        this[i].addEventListener('mouseleave', () => {
+          setInt(clickNextSlide, autoPlay);
+        }); //  });
+      }
+
       Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i].querySelector('[data-slide="next"]')).click(e => {
         e.preventDefault();
 
@@ -178,8 +200,10 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.carousel = function (cre
           slideIndex++;
         }
 
-        dots.forEach(dot => dot.classList.remove('active'));
-        dots[slideIndex].classList.add('active');
+        if (dots.length !== 0) {
+          dots.forEach(dot => dot.classList.remove('active'));
+          dots[slideIndex].classList.add('active');
+        }
       });
       Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i].querySelector('[data-slide="prev"]')).click(e => {
         e.preventDefault();
@@ -198,8 +222,10 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.carousel = function (cre
           slideIndex--;
         }
 
-        dots.forEach(dot => dot.classList.remove('active'));
-        dots[slideIndex].classList.add('active');
+        if (dots.length !== 0) {
+          dots.forEach(dot => dot.classList.remove('active'));
+          dots[slideIndex].classList.add('active');
+        }
       });
       const sliderId = this[i].getAttribute('id');
       const pathLi = `#${sliderId} .carousel-indicators li`;
@@ -220,6 +246,7 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.createCarousel = functio
   let {
     slides = {},
     dots = false,
+    autoPlay = false,
     length = 0
   } = _ref;
 
@@ -234,14 +261,18 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.createCarousel = functio
     const slidesBlock = [];
 
     for (let j = 0; j < length; j++) {
-      const li = document.createElement('li');
+      if (dots) {
+        const li = document.createElement('li');
 
-      if (j == 0) {
-        li.classList.add('active');
+        if (j == 0) {
+          li.classList.add('active');
+        }
+
+        li.setAttribute('data-slide-to', j);
+        liItems.push(li);
       }
 
-      li.setAttribute('data-slide-to', j);
-      liItems.push(li);
+      ;
       const imgBlock = document.createElement('div');
       imgBlock.classList.add("carousel-item");
       const img = document.createElement('img');
@@ -277,7 +308,7 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.createCarousel = functio
     }
 
     ;
-    Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(`#${id}`).carousel(true);
+    Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(`#${id}`).carousel(true, autoPlay);
   }
 
   ;
@@ -1022,6 +1053,7 @@ Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-on="carousel"]')
     1: "https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?cs=srgb&dl=calm-body-of-water-1363876.jpg&fm=jpg"
   },
   dots: true,
+  autoPlay: 2000,
   length: 2
 });
 Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-on="carousel3"]').createCarousel({
@@ -1030,7 +1062,6 @@ Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-on="carousel3"]'
     1: "https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?cs=srgb&dl=calm-body-of-water-1363876.jpg&fm=jpg",
     2: "https://pixlr.com/images/best-photo-editor-cover.jpg"
   },
-  dots: true,
   length: 3
 });
 Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-on="carousel2"]').createCarousel({
@@ -1042,6 +1073,7 @@ Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-on="carousel2"]'
     4: "https://ipiccy.com/res/template/img/hp_v2/pics/ba-01s3.jpg"
   },
   dots: true,
+  autoPlay: 2000,
   length: 5
 });
 

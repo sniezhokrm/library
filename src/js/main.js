@@ -51,6 +51,7 @@ $('[data-on="carousel"]').createCarousel({
         1: "https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?cs=srgb&dl=calm-body-of-water-1363876.jpg&fm=jpg"
         },
     dots: true,
+    autoPlay: 2000,
     length: 2
 });
 $('[data-on="carousel3"]').createCarousel({
@@ -58,9 +59,8 @@ $('[data-on="carousel3"]').createCarousel({
         0: "https://ipiccy.com/res/template/img/hp_v2/pics/ba-01s3.jpg",
         1: "https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?cs=srgb&dl=calm-body-of-water-1363876.jpg&fm=jpg",
         2: "https://pixlr.com/images/best-photo-editor-cover.jpg",
-        },
-    dots: true,
-    length: 3
+      },
+      length: 3
 });
 $('[data-on="carousel2"]').createCarousel({
     slides: {
@@ -71,5 +71,6 @@ $('[data-on="carousel2"]').createCarousel({
         4: "https://ipiccy.com/res/template/img/hp_v2/pics/ba-01s3.jpg",
         },
     dots: true,
+    autoPlay: 2000,
     length: 5
 });

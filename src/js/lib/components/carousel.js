@@ -1,6 +1,7 @@
 import $ from '../core';
 
-$.prototype.carousel = function(created) {
+$.prototype.carousel = function(created, autoPlay) {
+
   if (created) {
 
     for (let i = 0; i < this.length; i++) {
@@ -8,7 +9,6 @@ $.prototype.carousel = function(created) {
       const slides = this[i].querySelectorAll('.carousel-item');
       const slidesField = this[i].querySelector('.carousel-slides');
       const dots = this[i].querySelectorAll('.carousel-indicators li');
-
       slidesField.style.width = 100 * slides.length + '%';
       slides.forEach(slide => {
         slide.style.width = width;
@@ -16,6 +16,26 @@ $.prototype.carousel = function(created) {
 
       let offset = 0;
       let slideIndex = 0;
+      let slideInt = 0;
+      function setInt(content, delay) {
+        slideInt = setInterval(content, delay);
+      }
+
+      function clearInt(content) {
+        clearInterval(content);
+      }
+
+      if (autoPlay) {
+        const clickNextSlide = () =>$(this[i].querySelector('[data-slide="next"]')).click();
+        setInt(clickNextSlide, autoPlay);
+          this[i].addEventListener('mouseover', () => {
+            clearInt(slideInt);
+          });
+          this[i].addEventListener('mouseleave', () => {
+            setInt(clickNextSlide, autoPlay);
+          });
+      //  });
+      }
 
       $(this[i].querySelector('[data-slide="next"]')).click((e) => {
         e.preventDefault();
@@ -32,8 +52,10 @@ $.prototype.carousel = function(created) {
         } else {
           slideIndex++;
         }
-        dots.forEach(dot => dot.classList.remove('active'));
-        dots[slideIndex].classList.add('active');
+        if (dots.length !== 0) {
+          dots.forEach(dot => dot.classList.remove('active'));
+          dots[slideIndex].classList.add('active');
+        }
       });
 
       $(this[i].querySelector('[data-slide="prev"]')).click((e) => {
@@ -51,8 +73,10 @@ $.prototype.carousel = function(created) {
         } else {
           slideIndex--;
         }
-        dots.forEach(dot => dot.classList.remove('active'));
-        dots[slideIndex].classList.add('active');
+        if (dots.length !== 0) {
+          dots.forEach(dot => dot.classList.remove('active'));
+          dots[slideIndex].classList.add('active');
+        }
       });
 
       const sliderId = this[i].getAttribute('id');
@@ -75,6 +99,7 @@ $.prototype.carousel = function(created) {
 $.prototype.createCarousel = function({
   slides = {},
   dots = false,
+  autoPlay = false,
   length = 0
 }) {
 
@@ -89,12 +114,15 @@ $.prototype.createCarousel = function({
     const liItems = [];
     const slidesBlock = [];
     for (let j = 0; j < length; j++) {
-      const li = document.createElement('li');
-      if (j == 0) {
-        li.classList.add('active');
-      }
-      li.setAttribute('data-slide-to', j);
-      liItems.push(li);
+
+      if (dots) {
+        const li = document.createElement('li');
+        if (j == 0) {
+          li.classList.add('active');
+        }
+        li.setAttribute('data-slide-to', j);
+        liItems.push(li);
+      };
 
       const imgBlock = document.createElement('div');
       imgBlock.classList.add("carousel-item");
@@ -129,8 +157,8 @@ $.prototype.createCarousel = function({
         this[k].appendChild(carousel);
       };
     };
-      $(`#${id}`).carousel(true);
-    };
+    $(`#${id}`).carousel(true, autoPlay);
+  };
 
 };
 
