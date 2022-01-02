@@ -25,7 +25,7 @@ $.prototype.carousel = function(created, autoPlay) {
       }
 
       if (autoPlay) {
-        const clickNextSlide = () =>$(this[i].querySelector('[data-slide="next"]')).click();
+        const clickNextSlide = () => $(this[i].querySelector('[data-slide="next"]')).click();
         setInt(clickNextSlide, autoPlay);
           this[i].addEventListener('mouseover', () => {
             clearInt(slideInt);
@@ -79,7 +79,8 @@ $.prototype.carousel = function(created, autoPlay) {
       });
 
       const sliderId = this[i].getAttribute('id');
-      const pathLi = (`#${sliderId} .carousel-indicators li`)
+      const pathLi = (`#${sliderId} .carousel-indicators li`);
+
       $(`#${sliderId} .carousel-indicators li`).click(e => {
         const slideTo = e.target.getAttribute('data-slide-to');
         slideIndex = slideTo;
@@ -91,7 +92,7 @@ $.prototype.carousel = function(created, autoPlay) {
       });
     }
   }
-}
+};
 
 
 $.prototype.createCarousel = function({
@@ -120,7 +121,7 @@ $.prototype.createCarousel = function({
         }
         li.setAttribute('data-slide-to', j);
         liItems.push(li);
-      };
+      }
 
       const imgBlock = document.createElement('div');
       imgBlock.classList.add("carousel-item");
@@ -144,7 +145,7 @@ $.prototype.createCarousel = function({
           </a>
           <a href="#" class="carousel-next" data-slide="next">
               <span class="carousel-next-icon">&gt;</span>
-          </a>`
+          </a>`;
 
     carousel.querySelector(".carousel-indicators").append(...liItems);
     carousel.querySelector(".carousel-slides").append(...slidesBlock);
@@ -153,10 +154,10 @@ $.prototype.createCarousel = function({
     if (!this[i].querySelector('.carousel')) {
       for (var k = 0; k < this.length; k++) {
         this[k].appendChild(carousel);
-      };
-    };
+      }
+    }
     $(`#${id}`).carousel(true, autoPlay);
-  };
+  }
 
 };
 
