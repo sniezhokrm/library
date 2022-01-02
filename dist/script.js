@@ -239,13 +239,12 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.carousel = function (cre
       });
     }
   }
-}; //$('[data-toggle="carousel"]').carousel();
-
+};
 
 _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.createCarousel = function (_ref) {
   let {
     slides = {},
-    dots = false,
+    dots = true,
     autoPlay = false,
     length = 0
   } = _ref;
@@ -396,7 +395,6 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.dropdown = function () {
   for (let i = 0; i < this.length; i++) {
     const id = this[i].getAttribute('id');
     Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i]).click(() => {
-      console.log(2);
       Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(`[data-toggle-id="${id}"]`).fadeToggle(300);
     });
   }
@@ -478,8 +476,6 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.modal = function (create
     });
   }
 };
-
-Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-toggle="modal"]').modal();
 
 _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.createModal = function () {
   let {
@@ -1033,7 +1029,10 @@ Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-count="second"]'
 Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('button').eq(2).on('click', () => {
   Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('.w-500').fadeToggle(800);
 });
+Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-toggle="modal"]').modal(); //modal write in HTML
+
 Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('#trigger').click(() => Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('#trigger').createModal({
+  //modal write in JS
   text: {
     title: 'Modal title',
     body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum minus doloremque nesciunt enim rem quam corporis? Dolorem pariatur magnam distinctio perferendis. Ratione dolorem voluptates iusto facilis odit veritatis, suscipit voluptatibus!'
@@ -1047,34 +1046,24 @@ Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('#trigger').click(() =>
     }]]
   }
 }));
+Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-target="example"]').carousel(true, 2000); //carousel write in HTML
+
 Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-on="carousel"]').createCarousel({
+  //carousel write in JS
   slides: {
     0: "https://ipiccy.com/res/template/img/hp_v2/pics/ba-01s3.jpg",
     1: "https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?cs=srgb&dl=calm-body-of-water-1363876.jpg&fm=jpg"
   },
-  dots: true,
-  autoPlay: 2000,
   length: 2
 });
 Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-on="carousel3"]').createCarousel({
   slides: {
     0: "https://ipiccy.com/res/template/img/hp_v2/pics/ba-01s3.jpg",
     1: "https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?cs=srgb&dl=calm-body-of-water-1363876.jpg&fm=jpg",
-    2: "https://pixlr.com/images/best-photo-editor-cover.jpg"
+    2: "https://pixlr.com/images/best-photo-editor-cover.jpg",
+    3: "https://pixlr.com/images/best-photo-editor-cover.jpg"
   },
-  length: 3
-});
-Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-on="carousel2"]').createCarousel({
-  slides: {
-    0: "https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?cs=srgb&dl=calm-body-of-water-1363876.jpg&fm=jpg",
-    1: "https://pixlr.com/images/best-photo-editor-cover.jpg",
-    2: "https://ipiccy.com/res/template/img/hp_v2/pics/ba-01s3.jpg",
-    3: "https://pixlr.com/images/best-photo-editor-cover.jpg",
-    4: "https://ipiccy.com/res/template/img/hp_v2/pics/ba-01s3.jpg"
-  },
-  dots: true,
-  autoPlay: 2000,
-  length: 5
+  length: 4
 });
 
 /***/ })

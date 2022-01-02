@@ -12,7 +12,9 @@ $('button').eq(2).on('click', () => {
     $('.w-500').fadeToggle(800);
 });
 
-$('#trigger').click(() => $('#trigger').createModal({
+$('[data-toggle="modal"]').modal(); //modal write in HTML
+
+$('#trigger').click(() => $('#trigger').createModal({//modal write in JS
     text: {
         title: 'Modal title',
         body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum minus doloremque nesciunt enim rem quam corporis? Dolorem pariatur magnam distinctio perferendis. Ratione dolorem voluptates iusto facilis odit veritatis, suscipit voluptatibus!'
@@ -45,13 +47,13 @@ $('#trigger').click(() => $('#trigger').createModal({
     }
 }));
 
-$('[data-on="carousel"]').createCarousel({
+$('[data-target="example"]').carousel(true, 2000); //carousel write in HTML
+
+$('[data-on="carousel"]').createCarousel({ //carousel write in JS
     slides: {
         0: "https://ipiccy.com/res/template/img/hp_v2/pics/ba-01s3.jpg",
         1: "https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?cs=srgb&dl=calm-body-of-water-1363876.jpg&fm=jpg"
         },
-    dots: true,
-    autoPlay: 2000,
     length: 2
 });
 $('[data-on="carousel3"]').createCarousel({
@@ -59,18 +61,7 @@ $('[data-on="carousel3"]').createCarousel({
         0: "https://ipiccy.com/res/template/img/hp_v2/pics/ba-01s3.jpg",
         1: "https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?cs=srgb&dl=calm-body-of-water-1363876.jpg&fm=jpg",
         2: "https://pixlr.com/images/best-photo-editor-cover.jpg",
+        3: "https://pixlr.com/images/best-photo-editor-cover.jpg"
       },
-      length: 3
-});
-$('[data-on="carousel2"]').createCarousel({
-    slides: {
-        0: "https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?cs=srgb&dl=calm-body-of-water-1363876.jpg&fm=jpg",
-        1: "https://pixlr.com/images/best-photo-editor-cover.jpg",
-        2: "https://ipiccy.com/res/template/img/hp_v2/pics/ba-01s3.jpg",
-        3: "https://pixlr.com/images/best-photo-editor-cover.jpg",
-        4: "https://ipiccy.com/res/template/img/hp_v2/pics/ba-01s3.jpg",
-        },
-    dots: true,
-    autoPlay: 2000,
-    length: 5
+      length: 4
 });

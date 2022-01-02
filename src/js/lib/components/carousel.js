@@ -3,7 +3,6 @@ import $ from '../core';
 $.prototype.carousel = function(created, autoPlay) {
 
   if (created) {
-
     for (let i = 0; i < this.length; i++) {
       const width = window.getComputedStyle(this[i].querySelector('.carousel-inner')).width;
       const slides = this[i].querySelectorAll('.carousel-item');
@@ -94,11 +93,10 @@ $.prototype.carousel = function(created, autoPlay) {
   }
 }
 
-//$('[data-toggle="carousel"]').carousel();
 
 $.prototype.createCarousel = function({
   slides = {},
-  dots = false,
+  dots = true,
   autoPlay = false,
   length = 0
 }) {

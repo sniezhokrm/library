@@ -59,10 +59,9 @@ $.prototype.modal = function(created) {
     }
 };
 
-$('[data-toggle="modal"]').modal();
+
 
 $.prototype.createModal = function({text, btns} = {}) {
-
   const scroll = calcScroll();
 
     for (let i = 0; i< this.length; i++) {
