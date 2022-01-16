@@ -8,6 +8,8 @@ $.prototype.carousel = function(created, autoPlay) {
       const slides = this[i].querySelectorAll('.carousel-item');
       const slidesField = this[i].querySelector('.carousel-slides');
       const dots = this[i].querySelectorAll('.carousel-indicators li');
+      const desc = this[i].querySelectorAll('.carousel-text');
+
       slidesField.style.width = 100 * slides.length + '%';
       slides.forEach(slide => {
         slide.style.width = width;
@@ -16,6 +18,16 @@ $.prototype.carousel = function(created, autoPlay) {
       let offset = 0;
       let slideIndex = 0;
       let slideInt = 0;
+
+      function setDesc() {
+        for (var z = 0; z < desc.length; z++) {
+          desc[z].style.display = 'none';
+          desc[slideIndex].style.display = 'block';
+        }
+      }
+
+      setDesc();
+
       function setInt(content, delay) {
         slideInt = setInterval(content, delay);
       }
@@ -27,13 +39,13 @@ $.prototype.carousel = function(created, autoPlay) {
       if (autoPlay) {
         const clickNextSlide = () => $(this[i].querySelector('[data-slide="next"]')).click();
         setInt(clickNextSlide, autoPlay);
-          this[i].addEventListener('mouseover', () => {
-            clearInt(slideInt);
-          });
-          this[i].addEventListener('mouseleave', () => {
-            setInt(clickNextSlide, autoPlay);
-          });
-      //  });
+        this[i].addEventListener('mouseover', () => {
+          clearInt(slideInt);
+        });
+        this[i].addEventListener('mouseleave', () => {
+          setInt(clickNextSlide, autoPlay);
+        });
+        //  });
       }
 
       $(this[i].querySelector('[data-slide="next"]')).click((e) => {
@@ -55,6 +67,8 @@ $.prototype.carousel = function(created, autoPlay) {
           dots.forEach(dot => dot.classList.remove('active'));
           dots[slideIndex].classList.add('active');
         }
+        setDesc();
+
       });
 
       $(this[i].querySelector('[data-slide="prev"]')).click((e) => {
@@ -76,6 +90,9 @@ $.prototype.carousel = function(created, autoPlay) {
           dots.forEach(dot => dot.classList.remove('active'));
           dots[slideIndex].classList.add('active');
         }
+
+        setDesc();
+
       });
 
       const sliderId = this[i].getAttribute('id');
@@ -89,6 +106,9 @@ $.prototype.carousel = function(created, autoPlay) {
         slidesField.style.transform = `translateX(-${offset}px)`;
         dots.forEach(dot => dot.classList.remove('active'));
         dots[slideIndex].classList.add('active');
+
+        setDesc();
+
       });
     }
   }
@@ -99,6 +119,7 @@ $.prototype.createCarousel = function({
   slides = {},
   dots = true,
   autoPlay = false,
+  desc = {},
   length = 0
 }) {
 
@@ -112,8 +133,8 @@ $.prototype.createCarousel = function({
 
     const liItems = [];
     const slidesBlock = [];
+    const textBlock = [];
     for (let j = 0; j < length; j++) {
-
       if (dots) {
         const li = document.createElement('li');
         if (j == 0) {
@@ -129,7 +150,15 @@ $.prototype.createCarousel = function({
       img.setAttribute('src', slides[j]);
       imgBlock.append(img);
       slidesBlock.push(imgBlock);
+
+      const descBlock = document.createElement('div');
+      descBlock.classList.add("carousel-text");
+      descBlock.textContent = desc[j];
+      textBlock.push(descBlock);
+
     }
+
+
 
     carousel.innerHTML = //<div class="carousel" id=${carouselId}>
       `   <ol class="carousel-indicators">
@@ -140,6 +169,9 @@ $.prototype.createCarousel = function({
 
               </div>
           </div>
+          <div class="carousel-desc">
+
+          </div>
           <a href="#" class="carousel-prev" data-slide="prev">
               <span class="carousel-prev-icon">&lt;</span>
           </a>
@@ -149,8 +181,7 @@ $.prototype.createCarousel = function({
 
     carousel.querySelector(".carousel-indicators").append(...liItems);
     carousel.querySelector(".carousel-slides").append(...slidesBlock);
-
-
+    carousel.querySelector(".carousel-desc").append(...textBlock);
     if (!this[i].querySelector('.carousel')) {
       for (var k = 0; k < this.length; k++) {
         this[k].appendChild(carousel);
