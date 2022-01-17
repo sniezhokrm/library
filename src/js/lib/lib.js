@@ -10,5 +10,6 @@ import './components/tab';
 import './components/accardion';
 import './components/carousel';
 import './services/requests';
+import './modules/animation';
 
 export default $;
