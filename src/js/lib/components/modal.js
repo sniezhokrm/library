@@ -30,7 +30,8 @@ $.prototype.modal = function(created) {
 
         const closeElements = document.querySelectorAll(`${target} [data-close]`);
         closeElements.forEach(elem => {
-            $(elem).click(() => {
+            $(elem).click((e) => {
+              e.preventDefault();
               for (var i = 0; i < $('.modal').length; i++) {
                 $('.modal')[i].style.left = `${scroll/2}px`;
               }

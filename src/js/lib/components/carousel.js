@@ -2,6 +2,16 @@ import $ from '../core';
 
 $.prototype.carousel = function(created, autoPlay) {
 
+  //corect bag when width of screen is change
+  let savedWidth = document.documentElement.scrollWidth;
+
+  window.addEventListener('resize', function() {
+    if (document.documentElement.scrollWidth !== savedWidth) {
+      savedWidth = document.documentElement.scrollWidth;
+      window.location.reload();
+    }
+  });
+  
   if (created) {
     for (let i = 0; i < this.length; i++) {
       const width = window.getComputedStyle(this[i].querySelector('.carousel-inner')).width;
@@ -9,6 +19,8 @@ $.prototype.carousel = function(created, autoPlay) {
       const slidesField = this[i].querySelector('.carousel-slides');
       const dots = this[i].querySelectorAll('.carousel-indicators li');
       const desc = this[i].querySelectorAll('.carousel-text');
+
+
 
       slidesField.style.width = 100 * slides.length + '%';
       slides.forEach(slide => {

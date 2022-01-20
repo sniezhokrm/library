@@ -1,7 +1,7 @@
 .carousel {
     display: block;
     margin: 0 auto;
-    width: 900px;
+    width: 100%;
     position: relative;
     &-indicators {
         position: absolute;
@@ -92,6 +92,7 @@
         right: 0;
     }
 }
+
 
 // my option of carousel
 //

@@ -11,5 +11,6 @@ import './components/accardion';
 import './components/carousel';
 import './services/requests';
 import './modules/animation';
+import './components/parser';
 
 export default $;

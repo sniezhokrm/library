@@ -14,6 +14,8 @@ import $ from './lib/lib';
 //
 // $('[data-toggle="modal"]').modal(); //modal write in HTML
 
+$('body').parser(/^H\d/);
+
 $('.card-title').animation('animate__bounce', false);
 $('.card-img').animation('animate__bounce');
 // $('#trigger').click(() => $('#trigger').createModal({ //modal write in JS
